@@ -1,3 +1,5 @@
+$grid = {1 => true, 2=> true, 3=> true, 4=> true, 5=> true, 6=> true, 7=> true, 8=> true, 9=> true}
+
 class Player
     
     #if these positions are occupied by the player they have won
@@ -19,13 +21,13 @@ class Player
         WINNING_POSITIONS.each do |a|
             if (a & @positions) == a
                 return true
-            else
-                return false
             end
         end
+        return false
     end
     #add position to position array
     attr_accessor :positions
+    attr_reader :sign
 
     def move(position) 
         temp = self.positions
@@ -33,36 +35,59 @@ class Player
         self.positions = temp
     end
 end
+
+def print_grid
+    z = 1
+    for i in 1..3
+        puts "------------"
+        for j in 1..3
+            if $grid[z] == "X" or $grid[z] =="O"
+                print(" #{$grid[z]} |")
+            else
+                print(" #{z} |")
+            end
+            z+=1
+        end
+        puts ""
+        puts "------------"
+    end 
+end   
         
-grid = {1 => 1, 2=> true, 3=> true, 4=> true, 5=> true, 6=> true, 7=> true, 8=> true, 9=> true}
 
 player1 = Player.new("X")
 player2 = Player.new("O")
 puts "Welcome to TicTacToe!"
+puts "---------------------\n"
+puts "Instructions:\n 1. The board is printed below.\n 2. Each number represents a tile that you can mark. If a tile has a X or 0 on it that means it has been marked by you or your opponent. \n 3. To mark a tile enter the number of the tile. \n 4. Have fun and enjoy!"
+print_grid
 
- while true
+while true
     #begin code for player 1 moves
+    puts "Player 1 please enter the number of the tile you wish to mark:"
     pos = gets.chomp 
     player1.move(pos)
-   
-    p1 = player1.check_won
-    moves = player1.positions
+    
     if player1.check_won 
         puts "Player 1 has won!!!"
         exit
     else
-        grid[pos] = false
+        $grid[pos.to_i] = player1.sign 
     end
+    print_grid
     #end code for player 1 moves
 
     #begin code for player 2 moves. 
+    puts "Player 2 please enter the number of the tile you wish to mark:"
     pos = gets.chomp 
+    player2.move(pos)
+    
     p2 = player2.check_won
     if player2.check_won 
-        puts "Player 1 has won!!!"
+        puts "Player 2 has won!!!"
         exit
     else
-        grid[pos] = false
-    #end code for player 2 moves. 
+        $grid[pos.to_i] = player2.sign 
     end
+    print_grid
+    #end code for player 2 moves. 
 end
