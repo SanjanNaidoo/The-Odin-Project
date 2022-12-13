@@ -8,7 +8,7 @@ def Caesar_Cipher(input, shift)
             else next
         end
 
-        rotate = shift > 0 ? 26 => -26
+        rotate = shift > 0 ? 26 : -26
 
         char_val += shift 
         char_val -= rotate unless char_val.between?(bgn, ed)
