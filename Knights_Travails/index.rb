@@ -1,3 +1,5 @@
+require 'pry-byebug'
+
 class Node
     attr_accessor :x, :y, :children, :root
     def initialize(x,y,root=nil)
@@ -28,6 +30,7 @@ def calc_move(root,x,y)
     return if root == nil
     q = []
     q.push(root)
+    binding.pry
     while !q.empty?
         current = q[0]
         if current.check_valid
