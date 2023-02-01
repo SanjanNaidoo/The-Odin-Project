@@ -1,2 +1,2 @@
-# The Odin Project
-A collection of projects I did whilst working through The Odin Project. 
+# The Odin Project - Ruby
+A collection of projects I did whilst working through Ruby section of The Odin Project. 
